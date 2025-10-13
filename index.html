@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Рубилово кубов D&D 🎲</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🎲 Рубилово кубов D&D 🎲</h1>
+        <p>Победи врага с помощью силы кубов!</p>
+    </header>
+
+    <main class="battle-arena">
+        <div class="player-box">
+            <h2>Игрок</h2>
+            <div class="dice-container" id="player-dice"></div>
+            <p class="score">Сумма: <span id="player-score">0</span></p>
+        </div>
+       <div>
+        <div class="vs">⚔️</div>
+    </div>
+
+        <div class="enemy-box">
+            <h2>Монстр</h2>
+            <div class="dice-container" id="enemy-dice"></div>
+            <p class="score">Сумма: <span id="enemy-score">0</span></p>
+        </div>
+    </main>
+
+    <section class="controls">
+        <button id="roll-btn">Бросить кубы!</button>
+        <p id="result-text"></p>
+
+        <div class="counter">
+            <p>🏆 Победы: <span id="wins">0</span></p>
+            <p>💀 Поражения: <span id="losses">0</span></p>
+            <button id="reset-btn">Сбросить счёт</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Кубическое рубилово D&D. Пусть удача будет на твоей стороне!</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
