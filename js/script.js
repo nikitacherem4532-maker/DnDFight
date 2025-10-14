@@ -22,7 +22,7 @@ const fighters = [
     { emoji: "🐉", power: 8 }, { emoji: "🧙‍♂️", power: 7 },
     { emoji: "🤴", power: 7 }, { emoji: "🧞", power: 6 },
     { emoji: "🧛", power: 6 }, { emoji: "🦑", power: 6 },
-    { emoji: "👹", power: 5 }, { emoji: "🐦‍🔥", power: 5 },
+    { emoji: "👹", power: 5 }, { emoji: "👻", power: 5 },
     { emoji: "🤺", power: 4 }, { emoji: "🧝", power: 4 },
     { emoji: "🧜‍♂️", power: 4 }, { emoji: "👳‍♂️", power: 4 },
     { emoji: "👼", power: 4 }, { emoji: "💂‍♀️", power: 3 },
@@ -31,7 +31,7 @@ const fighters = [
     { emoji: "🐍", power: 2 }, { emoji: "👺", power: 2 },
     { emoji: "😈", power: 2 }, { emoji: "🐀", power: 1 },
     { emoji: "💀", power: 1 }, { emoji: "🧟", power: 1 },
-    { emoji: "👨‍🦼", power: 0 },
+    { emoji: "🦽", power: 0 },
 ];
 
 // 🎲 Выбираем случайных бойцов
@@ -116,3 +116,4 @@ toggleTableBtn.addEventListener("click", () => {
         : "❌ Скрыть таблицу сил";
 
 });
+
