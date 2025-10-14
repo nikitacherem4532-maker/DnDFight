@@ -155,3 +155,53 @@ footer {
     border-top: 2px solid #c79a3a;
     font-weight: 600;
 }
+.fighters-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .fighters-table {
+    width: 250px;
+    margin: 10px auto;
+    border-collapse: collapse;
+    background: #1b1b1b;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  }
+  
+  .fighters-table th,
+  .fighters-table td {
+    border-bottom: 1px solid #333;
+    padding: 6px;
+    color: #fff;
+  }
+  
+  .fighters-table th {
+    background: #222;
+    color: #ffd700;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .toggle-btn {
+    background: #333;
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  
+  .toggle-btn:hover {
+    background: #444;
+  }
+  #player-dice, 
+#enemy-dice {
+  font-size: 3rem; /* 🔥 увеличь число для ещё большего размера */
+  line-height: 1.2;
+  text-align: center;
+}
+  

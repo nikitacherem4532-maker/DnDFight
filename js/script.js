@@ -1,88 +1,85 @@
 // Получаем элементы
 const rollBtn = document.getElementById("roll-btn");
-const playerDiceContainer = document.getElementById("player-dice");
-const enemyDiceContainer = document.getElementById("enemy-dice");
-const playerScoreEl = document.getElementById("player-score");
-const enemyScoreEl = document.getElementById("enemy-score");
 const resultText = document.getElementById("result-text");
 const winsEl = document.getElementById("wins");
 const lossesEl = document.getElementById("losses");
 const resetBtn = document.getElementById("reset-btn");
+const playerDice = document.getElementById("player-dice");
+const enemyDice = document.getElementById("enemy-dice");
+const playerScoreEl = document.getElementById("player-score");
+const enemyScoreEl = document.getElementById("enemy-score");
+localStorage.clear(); // сбрасывает всё при загрузке
 
-// Загружаем счётчик из localStorage
+// Загружаем счётчики
 let wins = parseInt(localStorage.getItem("wins")) || 0;
 let losses = parseInt(localStorage.getItem("losses")) || 0;
 
-// Отображаем счётчики
 winsEl.textContent = wins;
 lossesEl.textContent = losses;
 
-// Функция броска кубов
-function rollDice(numDice = 3) {
-    const rolls = [];
-    for (let i = 0; i < numDice; i++) {
-        rolls.push(Math.floor(Math.random() * 6) + 1);
+// 🧙‍♂️ Бойцы
+const fighters = [
+    { emoji: "🐉", power: 8 }, { emoji: "🧙‍♂️", power: 7 },
+    { emoji: "🤴", power: 7 }, { emoji: "🧞", power: 6 },
+    { emoji: "🧛", power: 6 }, { emoji: "🦑", power: 6 },
+    { emoji: "👹", power: 5 }, { emoji: "🐦‍🔥", power: 5 },
+    { emoji: "🤺", power: 4 }, { emoji: "🧝", power: 4 },
+    { emoji: "🧜‍♂️", power: 4 }, { emoji: "🥷", power: 4 },
+    { emoji: "🧌", power: 4 }, { emoji: "🪤", power: 3 },
+    { emoji: "🕷️", power: 3 }, { emoji: "👾", power: 3 },
+    { emoji: "🦂", power: 3 }, { emoji: "🤡", power: 2 },
+    { emoji: "🐍", power: 2 }, { emoji: "👺", power: 2 },
+    { emoji: "😈", power: 2 }, { emoji: "🐀", power: 1 },
+    { emoji: "💀", power: 1 }, { emoji: "🧟", power: 1 },
+    { emoji: "🧑‍🦽‍➡️", power: 0 },
+];
+
+// 🎲 Выбираем случайных бойцов
+function getRandomFighters(count = 3) {
+    const result = [];
+    for (let i = 0; i < count; i++) {
+        result.push(fighters[Math.floor(Math.random() * fighters.length)]);
     }
-    return rolls;
+    return result;
 }
 
-// Функция отображения кубов
-function displayDice(container, rolls) {
-    container.innerHTML = "";
-    rolls.forEach(value => {
-        const die = document.createElement("div");
-        die.classList.add("die");
-        die.textContent = value;
-        container.appendChild(die);
-    });
-}
-
-// Основная логика боя
+// ⚔️ Бой
 rollBtn.addEventListener("click", () => {
-    rollBtn.disabled = true;
-    resultText.textContent = "🎲 Кубы летят...";
-    playerDiceContainer.innerHTML = "";
-    enemyDiceContainer.innerHTML = "";
+    const playerTeam = getRandomFighters();
+    const enemyTeam = getRandomFighters();
 
-    setTimeout(() => {
-        const playerRolls = rollDice();
-        const enemyRolls = rollDice();
+    const playerPower = playerTeam.reduce((a, f) => a + f.power, 0);
+    const enemyPower = enemyTeam.reduce((a, f) => a + f.power, 0);
 
-        displayDice(playerDiceContainer, playerRolls);
-        displayDice(enemyDiceContainer, enemyRolls);
+    // Показываем бойцов в блоках
+    playerDice.innerHTML = playerTeam.map(f => f.emoji).join(" ");
+    enemyDice.innerHTML = enemyTeam.map(f => f.emoji).join(" ");
 
-        const playerTotal = playerRolls.reduce((a, b) => a + b, 0);
-        const enemyTotal = enemyRolls.reduce((a, b) => a + b, 0);
+    playerScoreEl.textContent = playerPower;
+    enemyScoreEl.textContent = enemyPower;
 
-        playerScoreEl.textContent = playerTotal;
-        enemyScoreEl.textContent = enemyTotal;
+    // Результат
+    if (playerPower > enemyPower) {
+        wins++;
+        resultText.innerHTML = `🏆 Победа! (${playerPower} vs ${enemyPower})`;
+        resultText.style.color = "#ffd700";
+    } else if (playerPower < enemyPower) {
+        losses++;
+        resultText.innerHTML = `💀 Поражение... (${playerPower} vs ${enemyPower})`;
+        resultText.style.color = "#ff4a4a";
+    } else {
+        resultText.innerHTML = `🤝 Ничья! (${playerPower} vs ${enemyPower})`;
+        resultText.style.color = "#e0b94a";
+    }
 
-        if (playerTotal > enemyTotal) {
-            resultText.textContent = "🏆 Победа! Ты сокрушил монстра!";
-            resultText.style.color = "#ffd700";
-            wins++;
-        } else if (playerTotal < enemyTotal) {
-            resultText.textContent = "💀 Поражение... Монстр оказался сильнее.";
-            resultText.style.color = "#ff4a4a";
-            losses++;
-        } else {
-            resultText.textContent = "🤝 Ничья!";
-            resultText.style.color = "#e0b94a";
-        }
-
-        // Сохраняем счётчики
-        localStorage.setItem("wins", wins);
-        localStorage.setItem("losses", losses);
-
-        // Обновляем отображение
-        winsEl.textContent = wins;
-        lossesEl.textContent = losses;
-
-        rollBtn.disabled = false;
-    }, 1000);
+    // Обновляем счётчики
+    localStorage.setItem("wins", wins);
+    localStorage.setItem("losses", losses);
+    winsEl.textContent = wins;
+    lossesEl.textContent = losses;
 });
 
-// Кнопка сброса
+// 🔄 Сброс
 resetBtn.addEventListener("click", () => {
     wins = 0;
     losses = 0;
@@ -90,6 +87,31 @@ resetBtn.addEventListener("click", () => {
     localStorage.setItem("losses", losses);
     winsEl.textContent = wins;
     lossesEl.textContent = losses;
+    playerDice.textContent = "";
+    enemyDice.textContent = "";
+    playerScoreEl.textContent = "0";
+    enemyScoreEl.textContent = "0";
     resultText.textContent = "Счётчики сброшены!";
     resultText.style.color = "#e0b94a";
+});
+// 🧾 Таблица сил героев
+const toggleTableBtn = document.getElementById("toggle-table");
+const fightersTable = document.getElementById("fighters-table");
+const fightersBody = document.getElementById("fighters-body");
+
+// Создаём строки таблицы
+function renderFightersTable() {
+    fightersBody.innerHTML = fighters
+        .sort((a, b) => b.power - a.power)
+        .map(f => `<tr><td>${f.emoji}</td><td>${f.power}</td></tr>`)
+        .join("");
+}
+renderFightersTable();
+
+// Кнопка показать/скрыть
+toggleTableBtn.addEventListener("click", () => {
+    fightersTable.classList.toggle("hidden");
+    toggleTableBtn.textContent = fightersTable.classList.contains("hidden")
+        ? "📜 Показать таблицу сил"
+        : "❌ Скрыть таблицу сил";
 });
