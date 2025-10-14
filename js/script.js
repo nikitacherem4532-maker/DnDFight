@@ -24,14 +24,14 @@ const fighters = [
     { emoji: "🧛", power: 6 }, { emoji: "🦑", power: 6 },
     { emoji: "👹", power: 5 }, { emoji: "🐦‍🔥", power: 5 },
     { emoji: "🤺", power: 4 }, { emoji: "🧝", power: 4 },
-    { emoji: "🧜‍♂️", power: 4 }, { emoji: "🥷", power: 4 },
-    { emoji: "🧌", power: 4 }, { emoji: "🪤", power: 3 },
+    { emoji: "🧜‍♂️", power: 4 }, { emoji: "👳‍♂️", power: 4 },
+    { emoji: "👼", power: 4 }, { emoji: "💂‍♀️", power: 3 },
     { emoji: "🕷️", power: 3 }, { emoji: "👾", power: 3 },
     { emoji: "🦂", power: 3 }, { emoji: "🤡", power: 2 },
     { emoji: "🐍", power: 2 }, { emoji: "👺", power: 2 },
     { emoji: "😈", power: 2 }, { emoji: "🐀", power: 1 },
     { emoji: "💀", power: 1 }, { emoji: "🧟", power: 1 },
-    { emoji: "🧑‍🦽‍➡️", power: 0 },
+    { emoji: "👨‍🦼", power: 0 },
 ];
 
 // 🎲 Выбираем случайных бойцов
@@ -114,4 +114,5 @@ toggleTableBtn.addEventListener("click", () => {
     toggleTableBtn.textContent = fightersTable.classList.contains("hidden")
         ? "📜 Показать таблицу сил"
         : "❌ Скрыть таблицу сил";
+
 });
