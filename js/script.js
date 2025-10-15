@@ -31,7 +31,8 @@ const fighters = [
     { emoji: "🐍", power: 2 }, { emoji: "👺", power: 2 },
     { emoji: "😈", power: 2 }, { emoji: "🐀", power: 1 },
     { emoji: "💀", power: 1 }, { emoji: "🧟", power: 1 },
-    { emoji: "🦽", power: 0 },
+    { emoji: "🦽", power: 0 }, { emoji: "🥶", power: -1 },
+    { emoji: "🤢", power: -1 }, { emoji: "🥵", power: -1 },
 ];
 
 // 🎲 Выбираем случайных бойцов
@@ -116,4 +117,5 @@ toggleTableBtn.addEventListener("click", () => {
         : "❌ Скрыть таблицу сил";
 
 });
+
 
